@@ -36,9 +36,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
-
 
   @override
   _MyHomePageState createState() => new _MyHomePageState();
@@ -63,37 +62,30 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body:
-      Stack(
-          children: [
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 0.0),
-                child: ImagesSlider(
-                  items: map<Widget>(imgList, (index, i) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(i),
-                              fit: BoxFit.cover
-                          )
-                      ),
-                    );
-                  }),
-                  autoPlay: true,
-                  viewportFraction: 1.0,
-                  aspectRatio: 2.0,
-                  distortion: false,
-                  align: IndicatorAlign.bottom,
-                  indicatorWidth: 5,
-                  updateCallback: (index) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                )
-            ),
-          ]
-      ),
+      body: Stack(children: [
+        Padding(
+            padding: EdgeInsets.symmetric(vertical: 0.0),
+            child: ImagesSlider(
+              items: map<Widget>(imgList, (index, i) {
+                return Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(i), fit: BoxFit.cover)),
+                );
+              }),
+              autoPlay: true,
+              viewportFraction: 1.0,
+              aspectRatio: 2.0,
+              distortion: false,
+              align: IndicatorAlign.bottom,
+              indicatorWidth: 5,
+              updateCallback: (index) {
+                setState(() {
+                  _current = index;
+                });
+              },
+            )),
+      ]),
     );
   }
 }
